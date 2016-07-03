@@ -639,7 +639,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 				$this->db_tools->perform_schema_changes($schema_change);
 
 				// Copy the user data to the new column
-// TODO use buffer
+				// TODO use buffer
 				$sql = 'UPDATE ' . $this->table_prefix . 'profile_fields_data
 					SET pf_' . $profilefield_name . ' = pf_' . $meta['profilefield_oldname'];
 				$this->db->sql_query($sql);
