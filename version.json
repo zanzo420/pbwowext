@@ -1,0 +1,10 @@
+{
+	"stable": {
+		"3.0": {
+			"current": "3.0.3",
+			"announcement": "http://www.avathar.be/bbdkp/app.php/downloadsystemcat?id=3",
+			"eol": null,
+			"security": false
+		}
+	}
+}

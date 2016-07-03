@@ -106,7 +106,10 @@ class pbwow_module
 			}
 
 			// Check if old table still exists
-			if ($db_tools->sql_table_exists($legacy_dbtable1) || $db_tools->sql_table_exists($table_prefix . 'pbwow_config') || $db_tools->sql_table_exists($legacy_dbtable2) || $db_tools->sql_table_exists($table_prefix . 'pbwow2_config'))
+			if ($db_tools->sql_table_exists($legacy_dbtable1)
+				|| $db_tools->sql_table_exists($table_prefix . 'pbwow_config')
+				|| $db_tools->sql_table_exists($legacy_dbtable2)
+				|| $db_tools->sql_table_exists($table_prefix . 'pbwow2_config'))
 			{
 				$legacy_db_active = true;
 			}

@@ -3,6 +3,9 @@ PBWoW 3 Extension for phpBB 3.1
 
 Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionality.
 
+## Version 
+3.0.3  
+
 ## Features
 - Game avatars and profile icons (WoW, Diablo 3 & Wildstar) generated based on custom profile fields
 - Automatically configured gaming profile fields
@@ -25,7 +28,7 @@ Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionali
 - English
 
 ## Installation
-1. [Download the latest release](https://github.com/PayBas/PBWoW3ext/releases) and unzip it.
+1. [Download the latest release](https://github.com/bbdkp/PBWoW3ext/releases) and unzip it.
 2. Copy the entire contents from the unzipped folder to `phpBB/ext/paybas/pbwow/`.
 3. Navigate in the ACP to `Customise -> Manage extensions`.
 4. Find `PBWoW 3 Extension` under "Disabled Extensions" and click `Enable`.
