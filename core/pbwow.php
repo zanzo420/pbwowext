@@ -702,7 +702,7 @@ class pbwow
 			$bnet_a = isset($tpl_fields['row']['PROFILE_PB_BNET_AVATAR_VALUE']) ? $profile_row['pb_bnet_avatar']['value'] : null; // Get the Battle.net avatar
 
 			// I know it looks silly, but we need this to fix icon classes in templates
-			if ($wow <_r > 0)
+			if ($wow_r > 0)
 			{
 				$tpl_fields['row']['PROFILE_PB_WOW_RACE_VALUE_RAW'] = $wow_r;
 			}
