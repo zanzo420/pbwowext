@@ -278,12 +278,15 @@ class pbwow_module
 
 			$pb_charsdb_flush_url = $this->u_action . '&charsdb_flush=1';
 
+			$a = (isset($versions['stable']['3.0']['current'])) ? $versions['stable']['3.0']['current'] : '';
+			$b = $ext_version;
+
 			$template->assign_vars(array(
 					'S_INDEX'               => true,
 
 					'S_CHECK_V'             => (empty($versions)) ? false : true,
 					'EXT_VERSION'           => $ext_version,
-					'EXT_VERSION_V'         => (isset($versions['ext_version']['version'])) ? $versions['ext_version']['version'] : '',
+					'EXT_VERSION_V'         => (isset($versions['stable']['3.0']['current'])) ? $versions['stable']['3.0']['current'] : '',
 					'STYLE_VERSION'         => (isset($style_version)) ? $style_version : '',
 					'STYLE_VERSION_V'       => (isset($versions['style_version']['version'])) ? $versions['style_version']['version'] : '',
 					'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
@@ -489,10 +492,55 @@ class pbwow_module
 		$this->pbwow_config[$config_name] = $config_value;
 	}
 
+
+	/**
+	 * @param bool $force_update
+	 * @param bool $warn_fail
+	 * @param int  $ttl
+	 * @return bool|mixed
+	 */
+	function obtain_remote_version($force_update = false, $warn_fail = false, $ttl = 86400)
+	{
+		global $user, $cache;
+
+		$host = 'avathar.be';
+		$directory = '/versioncheck';
+		$filename = 'pbwowext.json';
+		$port = 80;
+		$timeout = 5;
+
+		//get latest productversion from cache
+		$info = $cache->get('pbwow_versioncheck');
+
+		if ($info === false || $force_update)
+		{
+			$errstr = '';
+			$errno = 0;
+
+			$info = get_remote_file($host, $directory, $filename, $errstr, $errno);
+
+			if (empty($info))
+			{
+				$cache->destroy('pbwow_versioncheck');
+				if ($warn_fail)
+				{
+					trigger_error($errstr, E_USER_WARNING);
+				}
+				return false;
+			}
+
+			$info = json_decode($info, true);
+			$cache->put('pbwow_versioncheck', $info, $ttl);
+		}
+
+		return $info;
+	}
+
+
 	/**
 	 * Obtains the latest version information.
 	 */
-	function obtain_remote_version($force_update = false, $debug = false, $warn_fail = false, $ttl = 86400)
+	function obtain_remote_version_old($force_update = false, $debug = false, $warn_fail = false, $ttl = 86400)
 	{
 		global $cache, $config;
 
