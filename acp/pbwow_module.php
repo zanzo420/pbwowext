@@ -278,9 +278,6 @@ class pbwow_module
 
 			$pb_charsdb_flush_url = $this->u_action . '&charsdb_flush=1';
 
-			$a = (isset($versions['stable']['3.0']['current'])) ? $versions['stable']['3.0']['current'] : '';
-			$b = $ext_version;
-
 			$template->assign_vars(array(
 					'S_INDEX'               => true,
 
