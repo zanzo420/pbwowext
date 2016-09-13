@@ -9,6 +9,7 @@ Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionali
 ## Changelog 
 - now uses phpbb version_helper class to fetch latest version info
 - added Demon hunter class for WoW
+- added uninstall feature
 
 
 ## Features
