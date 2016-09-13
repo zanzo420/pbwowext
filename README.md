@@ -1,6 +1,9 @@
 PBWoW 3 Extension for phpBB 3.1
 =========
 
+
+[![Foo](https://travis-ci.org/bbDKP/PBWoW3ext.svg?branch=develop)](https://travis-ci.org/bbDKP/PBWoW3ext)
+
 Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionality.
 
 ## Version 

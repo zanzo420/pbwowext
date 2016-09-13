@@ -614,7 +614,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 		$max_field_order = (int) $this->db->sql_fetchfield('max_field_order');
 		$this->db->sql_freeresult($result);
 
-		foreach($this->profilefields as $profilefield_name => $meta)
+		foreach ($this->profilefields as $profilefield_name => $meta)
 		{
 			if ($this->db_tools->sql_column_exists($this->table_prefix . 'profile_fields_data', 'pf_' . $profilefield_name))
 			{
@@ -639,7 +639,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 				$this->db_tools->perform_schema_changes($schema_change);
 
 				// Copy the user data to the new column
-// TODO use buffer
+				// TODO use buffer
 				$sql = 'UPDATE ' . $this->table_prefix . 'profile_fields_data
 					SET pf_' . $profilefield_name . ' = pf_' . $meta['profilefield_oldname'];
 				$this->db->sql_query($sql);
@@ -691,7 +691,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 					if ($entries)
 					{
 						// This profile field has predefined entry values, so they must be set for each lang
-						foreach($entries as $entry => $value)
+						foreach ($entries as $entry => $value)
 						{
 							$insert_buffer2->insert(array(
 								'field_id'		=> $field_id,
