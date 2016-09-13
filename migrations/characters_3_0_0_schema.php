@@ -22,8 +22,8 @@ class characters_3_0_0_schema extends \phpbb\db\migration\migration
 			'add_tables' => array(
 				$this->table_prefix . 'pbwow3_chars' => array(
 					'COLUMNS' => array(
-						'id' 				=> array('UINT', null, 'auto_increment'),
-						'user_id' 			=> array('UINT', null),
+						'id' 				=> array('UINT', NULL, 'auto_increment'),
+						'user_id' 			=> array('UINT', NULL),
 						'updated'			=> array('BINT', 0),
 						'tries'				=> array('TINT:3', 0),
 						'game'				=> array('VCHAR', ''),

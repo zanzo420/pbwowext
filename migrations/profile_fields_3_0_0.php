@@ -605,6 +605,14 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 			array('config.update', array('load_cpf_viewtopic', '1')),
 		);
 	}
+	
+	
+	public function revert_data()
+	{
+		return array(
+			array('custom', array(array($this, 'remove_pbwow_fields'))),
+		);
+	}
 
 	public function create_pbwow_fields()
 	{
@@ -614,7 +622,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 		$max_field_order = (int) $this->db->sql_fetchfield('max_field_order');
 		$this->db->sql_freeresult($result);
 
-		foreach ($this->profilefields as $profilefield_name => $meta)
+		foreach($this->profilefields as $profilefield_name => $meta)
 		{
 			if ($this->db_tools->sql_column_exists($this->table_prefix . 'profile_fields_data', 'pf_' . $profilefield_name))
 			{
@@ -691,7 +699,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 					if ($entries)
 					{
 						// This profile field has predefined entry values, so they must be set for each lang
-						foreach ($entries as $entry => $value)
+						foreach($entries as $entry => $value)
 						{
 							$insert_buffer2->insert(array(
 								'field_id'		=> $field_id,
@@ -718,4 +726,50 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 			}
 		}
 	}
+	
+	/**
+	 * * remove pbwow columns from profile_fields_data
+	 * @return mixed
+	 */
+	public function revert_schema()
+	{
+		//delete pf rows from PROFILE_FIELDS_DATA_TABLE
+		foreach($this->profilefields as $profilefield_name => $meta)
+		{
+			$table['drop_columns'][PROFILE_FIELDS_DATA_TABLE][] = 'pf_' . $profilefield_name;
+		}
+		return $table;
+	}
+	
+	/**
+	 * remove pbwow data
+	 */
+	public function remove_pbwow_fields()
+	{
+		foreach($this->profilefields as $profilefield_name => $meta)
+		{
+			//phpbb_profile_lang table
+			$sql1 = 'DELETE FROM ' . PROFILE_LANG_TABLE . " WHERE lang_name = '" .  $meta['profilefield_lang_name'] . "'";
+			$this->db->sql_query($sql1);
+		
+			//phpbb_profile_fields table
+			$sql1 = 'DELETE FROM ' . PROFILE_FIELDS_TABLE . " WHERE field_name = '" .  $profilefield_name . "'";
+			$this->db->sql_query($sql1);
+			
+			//profile_fields_lang
+			if ($meta['profilefield_data']['field_type'] == 'profilefields.type.dropdown')
+			{
+				foreach($meta['profilefield_entries'] as $key => $entries)
+				{
+					$sql2 = 'DELETE FROM ' . PROFILE_FIELDS_LANG_TABLE . " WHERE field_type = 'profilefields.type.dropdown' and lang_value= '" . $entries . "'";
+					$this->db->sql_query($sql2);
+				}
+			}
+			
+		}
+		return true;
+				
+	}
+	
+	
 }
