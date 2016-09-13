@@ -64,7 +64,7 @@ $lang = array_merge($lang, array(
 	'PBWOW_EXT_VERSION'					=> 'Extension version',
 	'PBWOW_STYLE_VERSION'				=> 'Style version',
 	'PBWOW_VERSION_ERROR'				=> 'Unable to determine version!',
-	'PBWOW_CHECK_UPDATE'				=> 'Check <a href="http://pbwow.com/forum/index.php">PBWoW.com</a> to see if there are updates available.',
+	'PBWOW_CHECK_UPDATE'				=> 'Check <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> to see if there are updates available.',
 
 	'PBWOW_CPF_CHECK'					=> 'Custom Profile Fields Check',
 	//'PBWOW_CPF_CREATE_LOCATION'			=> 'Create or enable this field via ACP > Users and Groups > Custom profile fields',

@@ -9,21 +9,27 @@
 
 namespace paybas\pbwow\core;
 
+use phpbb\cache\service;
+use phpbb\config\config;
+use phpbb\db\driver\driver_interface;
+use phpbb\db\tools;
+use phpbb\event\dispatcher_interface;
+
 class pbwow
 {
-	/** @var \phpbb\config\config */
+	/** @var config */
 	protected $config;
 
-	/** @var \phpbb\cache\service */
+	/** @var service */
 	protected $cache;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var driver_interface */
 	protected $db;
 
-	/** @var \phpbb\db\tools */
+	/** @var tools */
 	protected $db_tools;
 
-	/** @var \phpbb\event\dispatcher_interface */
+	/** @var dispatcher_interface */
 	protected $dispatcher;
 
 	/** @var \phpbb\extension\manager */
@@ -56,7 +62,25 @@ class pbwow
 	protected $avatars_enabled_full;
 	protected $tp_ext_enabled;
 
-	public function __construct(\phpbb\config\config $config, \phpbb\cache\service $cache, \phpbb\db\driver\driver_interface $db, \phpbb\db\tools $db_tools, \phpbb\event\dispatcher_interface $dispatcher, \phpbb\extension\manager $extension_manager, \phpbb\profilefields\manager $profilefields_manager, \phpbb\template\template $template, \phpbb\user $user, \phpbb\path_helper $path_helper, $root_path, $phpEx, $pbwow_config_table, $pbwow_chars_table)
+	/**
+	 * pbwow constructor.
+	 *
+	 * @param config                            $config
+	 * @param service                           $cache
+	 * @param driver_interface $db
+	 * @param tools                   $db_tools
+	 * @param dispatcher_interface $dispatcher
+	 * @param \phpbb\extension\manager          $extension_manager
+	 * @param \phpbb\profilefields\manager      $profilefields_manager
+	 * @param \phpbb\template\template          $template
+	 * @param \phpbb\user                       $user
+	 * @param \phpbb\path_helper                $path_helper
+	 * @param                                   $root_path
+	 * @param                                   $phpEx
+	 * @param                                   $pbwow_config_table
+	 * @param                                   $pbwow_chars_table
+	 */
+	public function __construct(config $config, service $cache, driver_interface $db, tools $db_tools, dispatcher_interface $dispatcher, \phpbb\extension\manager $extension_manager, \phpbb\profilefields\manager $profilefields_manager, \phpbb\template\template $template, \phpbb\user $user, \phpbb\path_helper $path_helper, $root_path, $phpEx, $pbwow_config_table, $pbwow_chars_table)
 	{
 		$this->config = $config;
 		$this->cache = $cache;
@@ -326,6 +350,7 @@ class pbwow
 
 				if ($callAPI == true)
 				{
+					//http://us.battle.net/api
 					// CPF values haven't been assigned yet, so have to do it manually
 					switch ($bnet_h)
 					{
@@ -446,6 +471,13 @@ class pbwow
 		return $call_list;
 	}
 
+	/**
+	 * @param $api_data
+	 * @param $no_call_list
+	 * @param $char_data
+	 * @param $field_data
+	 * @return mixed
+	 */
 	protected function process_api_data($api_data, $no_call_list, $char_data, $field_data)
 	{
 		foreach ($api_data as $user_id => $data_array)
