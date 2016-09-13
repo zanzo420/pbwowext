@@ -40,7 +40,7 @@ class release_3_0_3 extends \phpbb\db\migration\migration
 	public function insert_demon_hunter()
 	{
 
-		$sql = 'SELECT field_id, lang_id, option_id, field_type from ' . PROFILE_FIELDS_LANG_TABLE . " WHERE lang_value = 'Death Knight'";
+		$sql = 'SELECT field_id, lang_id, option_id, field_type from ' . PROFILE_FIELDS_LANG_TABLE . " WHERE lang_value = 'Demon Hunter'";
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{

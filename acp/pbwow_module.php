@@ -283,7 +283,7 @@ class pbwow_module
 
 					'S_CHECK_V'             => (empty($versions)) ? false : true,
 					'EXT_VERSION'           => $ext_version,
-					'EXT_VERSION_V'         => (isset($versions['ext_version'])) ? $versions['ext_version'] : '',
+					'EXT_VERSION_V'         => (isset($versions['version'])) ? $versions['version'] : '',
 					'STYLE_VERSION'         => (isset($style_version)) ? $style_version : '',
 					'STYLE_VERSION_V'       => (isset($versions['style_version'])) ? $versions['style_version'] : '',
 					'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
@@ -511,9 +511,7 @@ class pbwow_module
 			$version_helper->set_current_version($cache->get('pbwow_versioncheck'));
 			$version_helper->set_file_location($host, $directory, $filename, false);
 			$version_helper->force_stability('stable');
-			
 			$versions = $version_helper->get_versions_matching_stability($force_update, false);
-			
 						
 			$latest_version_a  = $versions['3.0'];
 			$cache->put('pbwow_versioncheck', $latest_version_a);
