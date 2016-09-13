@@ -35,9 +35,7 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			{
 				return;
 			}
-		}
-		else
-		{
+		} else {
 			return;
 		}
 
@@ -50,8 +48,8 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			),
 			array(
 				'config_name' => 'ads_index_code',
-				'config_value' => '<a class="donate-button" href="http://pbwow.com/donate/"></a>',
-				'config_default' => '<a class="donate-button" href="http://pbwow.com/donate/"></a>',
+				'config_value' => '<a class="donate-button" href="http://www.avathar.be/bbdkp/app.php/page/donate"></a>',
+				'config_default' => '<a class="donate-button" href="http://www.avathar.be/bbdkp/app.php/page/donate"></a>',
 			),
 
 			// Global styling
@@ -63,7 +61,7 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			array(
 				'config_name' => 'topbar_code',
 				'config_value' => '<li class="icon1 small-icon" data-skip-responsive="true"><strong>Hi there! This is a welcome message.</strong></li>
-<li class="icon2 small-icon link"><a href="http://pbwow.com/forum/">PBWoW</a></li>
+<li class="icon2 small-icon link"><a href="http://www.avathar.be/bbdkp/">avathar.be</a></li>
 <li class="icon3 small-icon link"><a href="https://www.phpbb.com/">phpBB</a></li>
 <li class="icon4 small-icon link rightside"><a href="#">On the right</a></li>',
 				'config_default' => '',
@@ -124,9 +122,7 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			),
 			array(
 				'config_name' => 'headerlinks_code',
-				'config_value' => '<li class="icon-dkp small-icon"><a href="http://bbdkp.com/" target="_blank">DKP</a></li>
-<li class="icon-custom1 small-icon"><a href="http://pbwow.com/" target="_blank">PBWoW</a></li>
-<li class="icon-portal small-icon"><a href="http://www.phpbb.com/" target="_blank">phpBB</a></li>',
+				'config_value' => '<li class="icon-portal small-icon"><a href="http://www.phpbb.com/" target="_blank">phpBB</a></li>',
 				'config_default' => '',
 			),
 

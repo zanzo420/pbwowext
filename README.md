@@ -10,7 +10,6 @@ Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionali
 - now uses phpbb version_helper class to fetch latest version info
 - added Demon hunter class for WoW 
 
-
 ## Features
 - Game avatars and profile icons (WoW, Diablo 3 & Wildstar) generated based on custom profile fields
 - Automatically configured gaming profile fields
@@ -28,12 +27,13 @@ Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionali
 #### Requirements
 - phpBB 3.1.3 or higher
 - PHP 5.3.3 or higher
+- pbWoW style (recommended)
 
 #### Languages supported
 - English
 
 ## Installation
-1. [Download the latest release](https://github.com/bbdkp/PBWoW3ext/releases) and unzip it.
+1. [Download the latest release](http://www.avathar.be/bbdkp/app.php/dl_ext/?cat=1) and unzip it.
 2. Copy the entire contents from the unzipped folder to `phpBB/ext/paybas/pbwow/`.
 3. Navigate in the ACP to `Customise -> Manage extensions`.
 4. Find `PBWoW 3 Extension` under "Disabled Extensions" and click `Enable`.
