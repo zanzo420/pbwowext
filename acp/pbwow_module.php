@@ -96,9 +96,9 @@ class pbwow_module
 				$values = parse_cfg_file($style_root . 'style.cfg');
 				$style_version = (isset($values['style_version'])) ? $values['style_version'] : '';
 			}
-
-			$versions = $this->obtain_remote_version($request->variable('versioncheck_force', false), true);
-
+			
+			$versions = $this->version_check($request->variable('versioncheck_force', false));
+						
 			// Check if old constants are still being used
 			if (!empty($legacy_dbtable1) || !empty($legacy_dbtable2))
 			{
@@ -283,9 +283,9 @@ class pbwow_module
 
 					'S_CHECK_V'             => (empty($versions)) ? false : true,
 					'EXT_VERSION'           => $ext_version,
-					'EXT_VERSION_V'         => (isset($versions['stable']['3.0']['current'])) ? $versions['stable']['3.0']['current'] : '',
+					'EXT_VERSION_V'         => (isset($versions['ext_version'])) ? $versions['ext_version'] : '',
 					'STYLE_VERSION'         => (isset($style_version)) ? $style_version : '',
-					'STYLE_VERSION_V'       => (isset($versions['style_version']['version'])) ? $versions['style_version']['version'] : '',
+					'STYLE_VERSION_V'       => (isset($versions['style_version'])) ? $versions['style_version'] : '',
 					'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
 					'S_ALLOW_CURL'          => $allow_curl,
 
@@ -489,134 +489,35 @@ class pbwow_module
 		$this->pbwow_config[$config_name] = $config_value;
 	}
 
-
 	/**
-	 * @param bool $force_update
-	 * @param bool $warn_fail
-	 * @param int  $ttl
-	 * @return bool|mixed
+	 * Obtains the latest version information.
 	 */
-	function obtain_remote_version($force_update = false, $warn_fail = false, $ttl = 86400)
+	function version_check($force_update = false)
 	{
-		global $user, $cache;
-
-		$host = 'avathar.be';
+		global $cache, $config, $user;
+		
+		$host = 'www.avathar.be';
 		$directory = '/versioncheck';
 		$filename = 'pbwowext.json';
 		$port = 80;
 		$timeout = 5;
-
-		//get latest productversion from cache
-		$info = $cache->get('pbwow_versioncheck');
-
-		if ($info === false || $force_update)
+		
+		$latest_version_a = $cache->get('pbwow_versioncheck');
+		if ($latest_version_a === false || $force_update)
 		{
 			$errstr = '';
 			$errno = 0;
-
-			$info = get_remote_file($host, $directory, $filename, $errstr, $errno);
-
-			if (empty($info))
-			{
-				$cache->destroy('pbwow_versioncheck');
-				if ($warn_fail)
-				{
-					trigger_error($errstr, E_USER_WARNING);
-				}
-				return false;
-			}
-
-			$info = json_decode($info, true);
-			$cache->put('pbwow_versioncheck', $info, $ttl);
+			$version_helper = new \phpbb\version_helper($cache, $config, new \phpbb\file_downloader(), $user);
+			$version_helper->set_current_version($cache->get('pbwow_versioncheck'));
+			$version_helper->set_file_location($host, $directory, $filename, false);
+			$version_helper->force_stability('stable');
+			
+			$versions = $version_helper->get_versions_matching_stability($force_update, false);
+			
+						
+			$latest_version_a  = $versions['3.0'];
+			$cache->put('pbwow_versioncheck', $latest_version_a);
 		}
-
-		return $info;
-	}
-
-
-	/**
-	 * Obtains the latest version information.
-	 */
-	function obtain_remote_version_old($force_update = false, $debug = false, $warn_fail = false, $ttl = 86400)
-	{
-		global $cache, $config;
-
-		$host = 'pbwow.com';
-		$directory = '/files';
-		$filename = 'version3.txt';
-		$port = 80;
-		$timeout = 5;
-
-		$info = $cache->get('pbwow_versioncheck');
-
-		if ($info === false || $force_update)
-		{
-			$errstr = '';
-			$errno = 0;
-
-			$info = get_remote_file($host, $directory, $filename, $errstr, $errno);
-
-			if (empty($info))
-			{
-				$cache->destroy('pbwow_versioncheck');
-				if ($warn_fail)
-				{
-					trigger_error($errstr, E_USER_WARNING);
-				}
-
-				return false;
-			}
-
-			$info = explode("\n", $info);
-			$versions = array();
-
-			foreach ($info as $component)
-			{
-				list($c, $v, $u) = explode(",", $component);
-				$u = (strpos($u, '&amp;') === false) ? str_replace('&', '&amp;', $u) : $u;
-				$versions[trim($c)] = array('version' => trim($v), 'url' => trim($u));
-			}
-			$info = $versions;
-
-			$cache->put('pbwow_versioncheck', $info, $ttl);
-
-			if ($debug && $fsock = @fsockopen($host, $port, $errno, $errstr, $timeout))
-			{
-				// only use when we are debuggin/troubleshooting
-				$a = (isset($config['sitename']) ? urlencode($config['sitename']) : '');
-				$b = (isset($config['server_name']) ? urlencode($config['server_name']) : '');
-				$c = (isset($config['script_path']) ? urlencode($config['script_path']) : '');
-				$d = (isset($config['server_port']) ? urlencode($config['server_port']) : '');
-				$e = (isset($config['board_contact']) ? urlencode($config['board_contact']) : '');
-				$f = (isset($config['num_posts']) ? urlencode($config['num_posts']) : '');
-				$g = (isset($config['num_topics']) ? urlencode($config['num_topics']) : '');
-				$h = (isset($config['num_users']) ? urlencode($config['num_users']) : '');
-				$i = (isset($config['version']) ? urlencode($config['version']) : '');
-				$j = (isset($config['pbwow3_version']) ? urlencode($config['pbwow3_version']) : '');
-				$k = (isset($config['rt_version']) ? urlencode($config['rt_version']) : '');
-				$l = (isset($config['topic_preview_version']) ? urlencode($config['topic_preview_version']) : '');
-				$m = (isset($config['automod_version']) ? urlencode($config['automod_version']) : '');
-				$n = (isset($config['load_cpf_memberlist']) ? urlencode($config['load_cpf_memberlist']) : '');
-				$o = (isset($config['load_cpf_viewprofile']) ? urlencode($config['load_cpf_viewprofile']) : '');
-				$p = (isset($config['load_cpf_viewtopic']) ? urlencode($config['load_cpf_viewtopic']) : '');
-				$out = "POST $directory/debug.php HTTP/1.1\r\n";
-				$out .= "HOST: $host\r\n";
-				$out .= "Content-type: application/x-www-form-urlencoded\n";
-				$out .= "Content-Length: " . strlen("a=$a&b=$b&c=$c&d=$d&e=$e&f=$f&g=$g&h=$h&i=$i&j=$j&k=$k&l=$l&m=$m&n=$n&o=$o&p=$p") . "\r\n";
-				$out .= "Connection: close\r\n\r\n";
-				$out .= "a=$a&b=$b&c=$c&d=$d&e=$e&f=$f&g=$g&h=$h&i=$i&j=$j&k=$k&l=$l&m=$m&n=$n&o=$o&p=$p";
-
-				@fwrite($fsock, $out);
-
-				$response = '';
-				while (!@feof($fsock))
-				{
-					$response .= @fgets($fsock, 1024);
-				}
-				@fclose($fsock);
-			}
-		}
-
-		return $info;
+		return $latest_version_a;
 	}
 }
