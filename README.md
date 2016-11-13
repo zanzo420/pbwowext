@@ -4,13 +4,12 @@ PBWoW 3 Extension for phpBB 3.1
 Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionality.
 
 ## Version 
-3.0.3  
+3.0.4  
 
-## Changelog 
-- now uses phpbb version_helper class to fetch latest version info
-- added Demon hunter class for WoW
-- added uninstall feature
-
+## Changelog
+ 
+##### 3.0.4 13/11/2016
+- compatible with phpBB 3.1.10
 
 ## Features
 - Game avatars and profile icons (WoW, Diablo 3 & Wildstar) generated based on custom profile fields
