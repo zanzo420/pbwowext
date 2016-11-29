@@ -283,7 +283,7 @@ class pbwow_module
 
 					'S_CHECK_V'             => (empty($versions)) ? false : true,
 					'EXT_VERSION'           => $ext_version,
-					'EXT_VERSION_V'         => (isset($versions['version'])) ? $versions['version'] : '',
+					'EXT_VERSION_V'         => (isset($versions['current'])) ? $versions['current'] : '',
 					'STYLE_VERSION'         => (isset($style_version)) ? $style_version : '',
 					'STYLE_VERSION_V'       => (isset($versions['style_version'])) ? $versions['style_version'] : '',
 					'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
@@ -492,7 +492,7 @@ class pbwow_module
 	/**
 	 * Obtains the latest version information.
 	 */
-	function version_check($force_update = false)
+	public function version_check($force_update = false)
 	{
 		global $cache, $config, $user;
 		
