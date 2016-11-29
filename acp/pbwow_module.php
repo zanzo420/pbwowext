@@ -96,9 +96,9 @@ class pbwow_module
 				$values = parse_cfg_file($style_root . 'style.cfg');
 				$style_version = (isset($values['style_version'])) ? $values['style_version'] : '';
 			}
-			
+
 			$versions = $this->version_check($request->variable('versioncheck_force', false));
-						
+
 			// Check if old constants are still being used
 			if (!empty($legacy_dbtable1) || !empty($legacy_dbtable2))
 			{
@@ -495,13 +495,13 @@ class pbwow_module
 	public function version_check($force_update = false)
 	{
 		global $cache, $config, $user;
-		
+
 		$host = 'www.avathar.be';
 		$directory = '/versioncheck';
 		$filename = 'pbwowext.json';
 		$port = 80;
 		$timeout = 5;
-		
+
 		$latest_version_a = $cache->get('pbwow_versioncheck');
 		if ($latest_version_a === false || $force_update)
 		{
@@ -512,7 +512,7 @@ class pbwow_module
 			$version_helper->set_file_location($host, $directory, $filename, false);
 			$version_helper->force_stability('stable');
 			$versions = $version_helper->get_versions_matching_stability($force_update, false);
-						
+
 			$latest_version_a  = $versions['3.0'];
 			$cache->put('pbwow_versioncheck', $latest_version_a);
 		}
