@@ -3,7 +3,7 @@
     "type": "phpbb-extension",
     "description": "This extension includes all the functionality needed to get the PBWoW 3 style for phpBB up and running.",
     "homepage": "https://github.com/bbdkp/PBWoW3ext",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "time": "2016-11-13",
     "license": "GPL-2.0",
     "authors": [
@@ -32,7 +32,7 @@
             "phpbb/phpbb": ">=3.1.0,<3.2@dev"
         },
         "version-check": {
-            "host": "www.avathar.be",
+            "host": "avathar.be",
             "directory": "/versioncheck",
             "filename": "pbwowext.json"
         }
