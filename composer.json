@@ -32,8 +32,8 @@
             "phpbb/phpbb": ">=3.1.0,<3.2@dev"
         },
         "version-check": {
-            "host": "avathar.be",
-            "directory": "/versioncheck",
+            "host": "raw.githubusercontent.com",
+            "directory": "/bbDKP/PBWoW3ext/develop",
             "filename": "pbwowext.json"
         }
     }
