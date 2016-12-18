@@ -208,6 +208,7 @@ class pbwow
 
 	/**
 	 * Generate the PBWoW avatar for the current user (for display in the header)
+	 * handler for core.page_header_after
 	 */
 	public function global_style_append_after()
 	{
@@ -531,7 +532,13 @@ class pbwow
 				$avatarURL = '';
 				if ($avatar)
 				{
-					$avatarURL = $this->config['server_protocol'] . $data_array['bnet_loc'] . "/static-render/" . $data_array['loc'] . "/" . $avatar;
+					// https://us.battle.net/forums/en/wow/topic/20752046076
+					// old
+					// lightbringer/144/29142672-avatar.jpg
+					// new
+					// http://render-eu.worldofwarcraft.com/character/lightbringer/144/29142672-avatar.jpg
+					$avatarURL = $this->config['server_protocol'] . 'render-' . $data_array['loc'] . ".worldofwarcraft.com/" . 'character/' . $avatar;
+
 					//$avatarIMG = @file_get_contents($IMGURL); // TODO cache them locally
 				}
 
