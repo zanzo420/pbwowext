@@ -35,7 +35,9 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			{
 				return;
 			}
-		} else {
+		}
+		else
+		{
 			return;
 		}
 
