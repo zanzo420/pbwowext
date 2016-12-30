@@ -1,5 +1,8 @@
 ## Changelog
- 
+
+ ##### 3.0.5b 30/12/2016
+ - [FIX] fix in migrations
+
 ##### 3.0.5 18/12/2016
 - [FIX] ACP now correctly sets the version color to red when extension is not up to date. 
 - [FIX] Blizzard Static Render Domains Update 
