@@ -104,11 +104,9 @@ class profile_fields_3_0_3 extends \phpbb\db\migration\migration
 	 *
 	 */
 	public function update_pbwow_fields()
-	{
-		
+	{		
 		foreach ($this->profilefields as $profilefield_name => $meta)
-		{
-			
+		{			
 			$sql = 'SELECT field_id FROM ' . PROFILE_FIELDS_TABLE . " WHERE  field_name = '" . $profilefield_name . "'" ;
 			$result = $this->db->sql_query($sql);
 			$field_id = (int) $this->db->sql_fetchfield('field_id');
@@ -145,7 +143,7 @@ class profile_fields_3_0_3 extends \phpbb\db\migration\migration
 	 */
 	public function remove_pbwow_fields()
 	{
-		foreach($this->profilefields as $profilefield_name => $meta)
+		foreach ($this->profilefields as $profilefield_name => $meta)
 		{
 			// remove profilefield_entries for each meta in profile_fields_lang
 			if ($meta['profilefield_data']['field_type'] == 'profilefields.type.dropdown')
@@ -155,8 +153,7 @@ class profile_fields_3_0_3 extends \phpbb\db\migration\migration
 					$sql2 = 'DELETE FROM ' . PROFILE_FIELDS_LANG_TABLE . " WHERE field_type = 'profilefields.type.dropdown' and lang_value= '" . $entries . "'";
 					$this->db->sql_query($sql2);
 				}
-			}
-			
+			}			
 		}
 		return true;
 	}

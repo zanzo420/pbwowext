@@ -733,7 +733,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 	public function revert_schema()
 	{
 		//delete pf rows from PROFILE_FIELDS_DATA_TABLE
-		foreach($this->profilefields as $profilefield_name => $meta)
+		foreach ($this->profilefields as $profilefield_name => $meta)
 		{
 			$table['drop_columns'][PROFILE_FIELDS_DATA_TABLE][] = 'pf_' . $profilefield_name;
 		}
@@ -753,8 +753,7 @@ class profile_fields_3_0_0 extends \phpbb\db\migration\migration
 
 			//phpbb_profile_fields table
 			$sql1 = 'DELETE FROM ' . PROFILE_FIELDS_TABLE . " WHERE field_name = '" .  $profilefield_name . "'";
-			$this->db->sql_query($sql1);
-			
+			$this->db->sql_query($sql1);		
 			//profile_fields_lang
 			if ($meta['profilefield_data']['field_type'] == 'profilefields.type.dropdown')
 			{
