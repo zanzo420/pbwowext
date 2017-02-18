@@ -805,6 +805,7 @@ class pbwow
 				wow_c = 9 > Warlock
 				wow_c = 10 > Monk
 				wow_c = 11 > Druid
+				wow_c = 12 > Demon Hunter
 				*/
 
 				$faction = 3; // Set faction to neutral, until we can determine correct faction
@@ -829,8 +830,8 @@ class pbwow
 						break;
 
 					case 4: // Night Elf
-						$valid = (in_array($wow_c, array(1, 3, 4, 5, 6, 8, 10, 11))) ? true : false;
-						$avail = (in_array($wow_c, array(1, 3, 4, 5, 6, 11))) ? true : false;
+						$valid = (in_array($wow_c, array(1, 3, 4, 5, 6, 8, 10, 11, 12))) ? true : false;
+						$avail = (in_array($wow_c, array(1, 3, 4, 5, 6, 11, 12))) ? true : false;
 						$faction = 1;
 						break;
 
@@ -865,8 +866,8 @@ class pbwow
 						break;
 
 					case 10: // Blood Elf
-						$valid = (in_array($wow_c, array(1, 2, 3, 4, 5, 6, 8, 9, 10))) ? true : false;
-						$avail = (in_array($wow_c, array(2, 3, 4, 5, 6, 8, 9))) ? true : false;
+						$valid = (in_array($wow_c, array(1, 2, 3, 4, 5, 6, 8, 9, 10, 12))) ? true : false;
+						$avail = (in_array($wow_c, array(2, 3, 4, 5, 6, 8, 9, 12))) ? true : false;
 						$faction = 2;
 						break;
 
