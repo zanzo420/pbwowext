@@ -4,7 +4,7 @@ PBWoW 3 Extension for phpBB 3.1
 Extension for phpBB 3.1 to enhance the PBWoW 3 style with additional functionality.
 
 ## Version 
-3.0.5 
+3.0.5b
 
 ## Features
 - Game avatars and profile icons (WoW, Diablo 3 & Wildstar) generated based on custom profile fields
