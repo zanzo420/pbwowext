@@ -7,13 +7,13 @@
  *
  */
 
-namespace paybas\pbwow\migrations;
+namespace paybas\pbwowext\migrations;
 
 class release_3_2_1_data extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
-		return array('\paybas\pbwow\migrations\release_3_2_data');
+		return array('\paybas\pbwowext\migrations\release_3_2');
 	}
 
 	public function update_data()
@@ -28,7 +28,7 @@ class release_3_2_1_data extends \phpbb\db\migration\migration
 		$sql_ary = array(
 			array(
 				'config_name' => 'topbar_code',
-				'new_config_value' =>'<li data-skip-responsive="true" class="leftside">
+				'config_value' =>'<li data-skip-responsive="true" class="leftside">
 <i class="icon fa-cubes fa-fw" aria-hidden="true"></i> <span><strong>Hi there! This is a welcome message</strong></span>
 </li>
 <li class="leftside"  ><a href="http://www.avathar.be" title="avathar.be" role="menuitem">
@@ -47,9 +47,8 @@ class release_3_2_1_data extends \phpbb\db\migration\migration
 		$sql = 'DELETE FROM ' . $this->table_prefix . 'pbwowext_config WHERE ' . $this->db->sql_in_set('config_name', 'topbar_code');
 		$this->db->sql_query($sql);
 
-		$sql = $this->db->sql_multi_insert($this->table_prefix . 'pbwowext_config', $sql_ary);
-		$this->db->sql_query($sql);
-
+		$this->db->sql_multi_insert($this->table_prefix . 'pbwowext_config', $sql_ary);
+		unset($sql_ary);
 
 	}
 
