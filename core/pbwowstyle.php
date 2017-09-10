@@ -79,17 +79,17 @@ class pbwowstyle
 	 * @param                                   $pbwow_config_table
 	 */
 	public function __construct(config $config,
-	                            service $cache,
-	                            driver_interface $db,
-	                            \phpbb\db\tools\tools $db_tools,
-	                            dispatcher_interface $dispatcher,
-	                            \phpbb\extension\manager $extension_manager,
-	                            \phpbb\template\template $template,
-	                            \phpbb\user $user,
-	                            \phpbb\path_helper $path_helper,
-	                            $root_path,
-	                            $phpEx,
-	                            $pbwow_config_table)
+		service $cache,
+		driver_interface $db,
+		\phpbb\db\tools\tools $db_tools,
+		dispatcher_interface $dispatcher,
+		\phpbb\extension\manager $extension_manager,
+		\phpbb\template\template $template,
+		\phpbb\user $user,
+		\phpbb\path_helper $path_helper,
+		$root_path,
+		$phpEx,
+		$pbwow_config_table)
 	{
 		$this->config = $config;
 		$this->cache = $cache;

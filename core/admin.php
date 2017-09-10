@@ -10,10 +10,6 @@
 
 namespace paybas\pbwowext\core;
 
-use phpbb\db\tools;
-use phpbb\version_helper;
-use phpbb\file_downloader;
-
 class admin
 {
 	/**

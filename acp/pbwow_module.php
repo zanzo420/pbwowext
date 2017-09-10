@@ -8,6 +8,7 @@
  */
 
 namespace paybas\pbwowext\acp;
+
 use paybas\pbwowext\core\admin;
 
 /**
@@ -188,9 +189,8 @@ class pbwow_module extends admin
 		else
 		{
 			// you have a prerelease or development version
-			$template->assign_vars(array('S_PBWOW_PRERELEASE'    => true));
+			$template->assign_vars(array('S_PBWOW_PRERELEASE' => true));
 		}
-
 
 		if (phpbb_version_compare($versions['style_version'], $style_version, '='))
 		{
