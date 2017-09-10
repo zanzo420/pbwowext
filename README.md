@@ -5,6 +5,7 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
 
 ## Version 
 3.2.1
+[![Build Status](https://api.travis-ci.org/Sajaki/pbwowext.svg)](https://travis-ci.org/Sajaki/pbwowext)
 
 ## Features
 - ACP module features:
