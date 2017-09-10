@@ -65,7 +65,6 @@ $lang = array_merge($lang, array(
 	'PBWOW_VERSION_ERROR'				=> 'Impossible de déterminer la version !',
 	'PBWOW_CHECK_UPDATE'				=> 'Vérifie <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> s’il y a une mise à jour.',
 
-	'PBWOW_CHECK_URL'                   => 'http://www.avathar.be/versioncheck/pbwowext.json',
 	'PBWOW_DONATE_URL'                  => 'http://www.avathar.be/bbdkp/app.php/page/donate',
 	'PAYPAL_IMAGE_URL'                  => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
 	'PAYPAL_ALT'                        => 'Donation PayPal',

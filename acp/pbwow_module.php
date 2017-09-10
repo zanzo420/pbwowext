@@ -323,15 +323,20 @@ class pbwow_module extends admin
 	public final function version_check($force_update = false, $ttl = 86400)
 	{
 		global $user, $cache;
+		global $phpbb_container;
+
+		$manager = $phpbb_container->get('ext.manager');
+		$metadata_manager = $manager->create_extension_metadata_manager('paybas/pbwowext', $phpbb_container->get('template'));
+		$meta_data = $metadata_manager->get_metadata();
+		$versionurl = $meta_data['extra']['version-check']['host'].$meta_data['extra']['version-check']['directory'].'/'.$meta_data['extra']['version-check']['filename'];
 
 		//get latest productversion from cache
 		$latest_version = $cache->get('pbwowext_versioncheck');
-		$filename = 'pbwowext.json';
 
 		//if update is forced or cache expired then make the call to refresh latest productversion
 		if ($latest_version === false || $force_update)
 		{
-			$data = parent::curl($user->lang['PBWOW_CHECK_URL'] , false, false, false);
+			$data = parent::curl($versionurl , false, false, false);
 			if (0 === count($data) )
 			{
 				$cache->destroy('pbwowext_versioncheck');
