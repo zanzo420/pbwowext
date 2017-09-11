@@ -1,35 +1,34 @@
 {
-    "name": "paybas/pbwow",
+    "name": "paybas/pbwowext",
     "type": "phpbb-extension",
-    "description": "This extension includes all the functionality needed to get the PBWoW 3 style for phpBB up and running.",
-    "homepage": "https://github.com/bbdkp/PBWoW3ext",
-    "version": "3.0.5",
-    "time": "2016-12-18",
+    "description": "This extension enhances the pbWoW style",
+    "homepage": "https://github.com/Sajaki/pbwowext",
+    "version": "3.2.1",
+    "time": "2017-07-31",
     "license": "GPL-2.0",
     "authors": [
         {
             "name": "PayBas",
-            "email": "admin@pbwow.com",
-            "homepage": "http://www.paybas.com",
             "role": "previous developer"
         },
         {
             "name": "Sajaki",
             "email": "sajaki@avathar.be",
+            "homepage": "http://www.avathar.be",
             "role": "developer"
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.5.0",
         "composer/installers": "~1.0"
     },
     "require-dev": {
         "phpbb/epv": "dev-master"
     },
     "extra": {
-        "display-name": "PBWoW 3 Extension",
+        "display-name": "PBWoW 3.2 Extension",
         "soft-require": {
-            "phpbb/phpbb": ">=3.1.0,<3.2@dev"
+            "phpbb/phpbb": ">=3.2"
         },
         "version-check": {
             "host": "avathar.be",

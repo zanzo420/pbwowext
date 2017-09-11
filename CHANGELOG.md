@@ -1,7 +1,15 @@
 ## Changelog
 
- ##### 3.0.5b 30/12/2016
- - [FIX] fix in migrations
+##### 3.2.1 09/09/2017
+- [UPG] Fix for responsibe view in Topbar  
+- [FIX] Versioncheck fix  
+
+##### 3.2.0 03/09/2017
+- [UPG] #4 compatible with pbWoW 3.2.1
+- [DEL] #3 removed battle.NET avatars and profile fields. to be moved to another extension.    
+ 
+##### 3.0.5b 30/12/2016
+- [FIX] fix in migrations
 
 ##### 3.0.5 18/12/2016
 - [FIX] ACP now correctly sets the version color to red when extension is not up to date. 
