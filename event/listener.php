@@ -11,16 +11,31 @@ namespace paybas\pbwow\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class listener
+ * @package paybas\pbwow\event
+ */
 class listener implements EventSubscriberInterface
 {
-	/* @var \paybas\pbwow\core\main */
+	/**
+	 * @var \paybas\pbwow\core\pbwow
+	 */
 	protected $pbwow;
 
+	/**
+	 * listener constructor.
+	 * @param \paybas\pbwow\core\pbwow $pbwow
+	 */
 	public function __construct(\paybas\pbwow\core\pbwow $pbwow)
 	{
 		$this->pbwow = $pbwow;
 	}
 
+	/**
+	 * Returns an array of event names this subscriber wants to listen to.
+	 *
+	 * @return array The event names to listen to
+	 */
 	static public function getSubscribedEvents()
 	{
 		return array(

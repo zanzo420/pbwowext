@@ -26,20 +26,20 @@ class release_3_0_0 extends \phpbb\db\migration\migration
 			array('config.add', array('pbwow3_version', '3.0.0')),
 
 			array('if', array(
-				array('module.exists', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_OVERVIEW')),
-				array('module.remove', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_OVERVIEW')),
+				array('module.exists', array('acp', false, 'ACP_PBWOW2_OVERVIEW')),
+				array('module.remove', array('acp', false, 'ACP_PBWOW2_OVERVIEW')),
 			)),
 			array('if', array(
-				array('module.exists', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_CONFIG')),
-				array('module.remove', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_CONFIG')),
+				array('module.exists', array('acp', false, 'ACP_PBWOW2_CONFIG')),
+				array('module.remove', array('acp', false, 'ACP_PBWOW2_CONFIG')),
 			)),
 			array('if', array(
-				array('module.exists', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_POSTSTYLING')),
-				array('module.remove', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_POSTSTYLING')),
+				array('module.exists', array('acp', false, 'ACP_PBWOW2_POSTSTYLING')),
+				array('module.remove', array('acp', false, 'ACP_PBWOW2_POSTSTYLING')),
 			)),
 			array('if', array(
-				array('module.exists', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_ADS')),
-				array('module.remove', array('acp', 'ACP_PBWOW2_CATEGORY', 'ACP_PBWOW2_ADS')),
+				array('module.exists', array('acp', false, 'ACP_PBWOW2_ADS')),
+				array('module.remove', array('acp', false, 'ACP_PBWOW2_ADS')),
 			)),
 			array('if', array(
 				array('module.exists', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_PBWOW2_CATEGORY')),

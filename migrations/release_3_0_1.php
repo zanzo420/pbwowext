@@ -13,7 +13,7 @@ class release_3_0_1 extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
-		return array('\paybas\pbwow\migrations\profile_fields_3_0_0');
+		return array('\paybas\pbwow\migrations\characters_3_0_0_schema');
 	}
 
 	public function update_data()

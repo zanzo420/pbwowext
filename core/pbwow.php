@@ -9,21 +9,27 @@
 
 namespace paybas\pbwow\core;
 
+use phpbb\cache\service;
+use phpbb\config\config;
+use phpbb\db\driver\driver_interface;
+use phpbb\db\tools;
+use phpbb\event\dispatcher_interface;
+
 class pbwow
 {
-	/** @var \phpbb\config\config */
+	/** @var config */
 	protected $config;
 
-	/** @var \phpbb\cache\service */
+	/** @var service */
 	protected $cache;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var driver_interface */
 	protected $db;
 
-	/** @var \phpbb\db\tools */
+	/** @var tools */
 	protected $db_tools;
 
-	/** @var \phpbb\event\dispatcher_interface */
+	/** @var dispatcher_interface */
 	protected $dispatcher;
 
 	/** @var \phpbb\extension\manager */
@@ -56,7 +62,25 @@ class pbwow
 	protected $avatars_enabled_full;
 	protected $tp_ext_enabled;
 
-	public function __construct(\phpbb\config\config $config, \phpbb\cache\service $cache, \phpbb\db\driver\driver_interface $db, \phpbb\db\tools $db_tools, \phpbb\event\dispatcher_interface $dispatcher, \phpbb\extension\manager $extension_manager, \phpbb\profilefields\manager $profilefields_manager, \phpbb\template\template $template, \phpbb\user $user, \phpbb\path_helper $path_helper, $root_path, $phpEx, $pbwow_config_table, $pbwow_chars_table)
+	/**
+	 * pbwow constructor.
+	 *
+	 * @param config                            $config
+	 * @param service                           $cache
+	 * @param driver_interface $db
+	 * @param tools                   $db_tools
+	 * @param dispatcher_interface $dispatcher
+	 * @param \phpbb\extension\manager          $extension_manager
+	 * @param \phpbb\profilefields\manager      $profilefields_manager
+	 * @param \phpbb\template\template          $template
+	 * @param \phpbb\user                       $user
+	 * @param \phpbb\path_helper                $path_helper
+	 * @param                                   $root_path
+	 * @param                                   $phpEx
+	 * @param                                   $pbwow_config_table
+	 * @param                                   $pbwow_chars_table
+	 */
+	public function __construct(config $config, service $cache, driver_interface $db, tools $db_tools, dispatcher_interface $dispatcher, \phpbb\extension\manager $extension_manager, \phpbb\profilefields\manager $profilefields_manager, \phpbb\template\template $template, \phpbb\user $user, \phpbb\path_helper $path_helper, $root_path, $phpEx, $pbwow_config_table, $pbwow_chars_table)
 	{
 		$this->config = $config;
 		$this->cache = $cache;
@@ -95,7 +119,7 @@ class pbwow
 		{
 			return;
 		}
-
+		$logo_margins='';
 		$tpl_vars = array();
 		$body_class = ' pbwow-ext';
 
@@ -184,6 +208,7 @@ class pbwow
 
 	/**
 	 * Generate the PBWoW avatar for the current user (for display in the header)
+	 * handler for core.page_header_after
 	 */
 	public function global_style_append_after()
 	{
@@ -326,6 +351,7 @@ class pbwow
 
 				if ($callAPI == true)
 				{
+					//http://us.battle.net/api
 					// CPF values haven't been assigned yet, so have to do it manually
 					switch ($bnet_h)
 					{
@@ -406,7 +432,6 @@ class pbwow
 			$response = curl_exec($ch);
 			curl_close($ch);
 
-
 			$response_data = array();
 			$error = false;
 
@@ -425,15 +450,16 @@ class pbwow
 					{
 						$error = $response_data['code'] . ' - ' . $response_data['type'];
 					}
-					else {
+					else
+					{
 						$error = $response_data['detail'];
 					}
 				}
-				elseif (isset($response_data['status']))
+				else if (isset($response_data['status']))
 				{
 					$error = $response_data['reason'];
 				}
-				elseif (!isset($response_data['name']))
+				else if (!isset($response_data['name']))
 				{
 					$error = 'Unknown API error';
 				}
@@ -446,6 +472,13 @@ class pbwow
 		return $call_list;
 	}
 
+	/**
+	 * @param $api_data
+	 * @param $no_call_list
+	 * @param $char_data
+	 * @param $field_data
+	 * @return mixed
+	 */
 	protected function process_api_data($api_data, $no_call_list, $char_data, $field_data)
 	{
 		foreach ($api_data as $user_id => $data_array)
@@ -499,7 +532,13 @@ class pbwow
 				$avatarURL = '';
 				if ($avatar)
 				{
-					$avatarURL = $this->config['server_protocol'] . $data_array['bnet_loc'] . "/static-render/" . $data_array['loc'] . "/" . $avatar;
+					// https://us.battle.net/forums/en/wow/topic/20752046076
+					// old
+					// lightbringer/144/29142672-avatar.jpg
+					// new
+					// http://render-eu.worldofwarcraft.com/character/lightbringer/144/29142672-avatar.jpg
+					$avatarURL = $this->config['server_protocol'] . 'render-' . $data_array['loc'] . ".worldofwarcraft.com/" . 'character/' . $avatar;
+
 					//$avatarIMG = @file_get_contents($IMGURL); // TODO cache them locally
 				}
 
@@ -670,16 +709,46 @@ class pbwow
 			$bnet_a = isset($tpl_fields['row']['PROFILE_PB_BNET_AVATAR_VALUE']) ? $profile_row['pb_bnet_avatar']['value'] : null; // Get the Battle.net avatar
 
 			// I know it looks silly, but we need this to fix icon classes in templates
-			if ($wow_r > 0) { $tpl_fields['row']['PROFILE_PB_WOW_RACE_VALUE_RAW'] = $wow_r; }
-			if ($wow_c > 0) { $tpl_fields['row']['PROFILE_PB_WOW_CLASS_VALUE_RAW'] = $wow_c; }
-			if ($wow_g > 0) { $tpl_fields['row']['PROFILE_PB_WOW_GENDER_VALUE_RAW'] = $wow_g; }
-			if ($d3_c > 0) { $tpl_fields['row']['PROFILE_PB_DIABLO_CLASS_VALUE_RAW'] = $d3_c; }
-			if ($d3_f > 0) { $tpl_fields['row']['PROFILE_PB_DIABLO_FOLLOWER_VALUE_RAW'] = $d3_f; }
-			if ($d3_g > 0) { $tpl_fields['row']['PROFILE_PB_DIABLO_GENDER_VALUE_RAW'] = $d3_g; }
-			if ($ws_r > 0) { $tpl_fields['row']['PROFILE_PB_WILDSTAR_RACE_VALUE_RAW'] = $ws_r; }
-			if ($ws_c > 0) { $tpl_fields['row']['PROFILE_PB_WILDSTAR_CLASS_VALUE_RAW'] = $ws_c; }
-			if ($ws_g > 0) { $tpl_fields['row']['PROFILE_PB_WILDSTAR_GENDER_VALUE_RAW'] = $ws_g; }
-			if ($ws_p > 0) { $tpl_fields['row']['PROFILE_PB_WILDSTAR_PATH_VALUE_RAW'] = $ws_p; }
+			if ($wow_r > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WOW_RACE_VALUE_RAW'] = $wow_r;
+			}
+			if ($wow_c > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WOW_CLASS_VALUE_RAW'] = $wow_c;
+			}
+			if ($wow_g > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WOW_GENDER_VALUE_RAW'] = $wow_g;
+			}
+			if ($d3_c > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_DIABLO_CLASS_VALUE_RAW'] = $d3_c;
+			}
+			if ($d3_f > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_DIABLO_FOLLOWER_VALUE_RAW'] = $d3_f;
+			}
+			if ($d3_g > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_DIABLO_GENDER_VALUE_RAW'] = $d3_g;
+			}
+			if ($ws_r > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WILDSTAR_RACE_VALUE_RAW'] = $ws_r;
+			}
+			if ($ws_c > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WILDSTAR_CLASS_VALUE_RAW'] = $ws_c;
+			}
+			if ($ws_g > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WILDSTAR_GENDER_VALUE_RAW'] = $ws_g;
+			}
+			if ($ws_p > 0)
+			{
+				$tpl_fields['row']['PROFILE_PB_WILDSTAR_PATH_VALUE_RAW'] = $ws_p;
+			}
 
 			$valid = false; // determines whether a specific profile field combination is valid (for the game)
 			$avail = false; // determines whether an avatar image is available for the profile field combination
@@ -743,6 +812,7 @@ class pbwow
 				wow_c = 9 > Warlock
 				wow_c = 10 > Monk
 				wow_c = 11 > Druid
+				wow_c = 12 > Demon Hunter
 				*/
 
 				$faction = 3; // Set faction to neutral, until we can determine correct faction
@@ -767,8 +837,8 @@ class pbwow
 						break;
 
 					case 4: // Night Elf
-						$valid = (in_array($wow_c, array(1, 3, 4, 5, 6, 8, 10, 11))) ? true : false;
-						$avail = (in_array($wow_c, array(1, 3, 4, 5, 6, 11))) ? true : false;
+						$valid = (in_array($wow_c, array(1, 3, 4, 5, 6, 8, 10, 11, 12))) ? true : false;
+						$avail = (in_array($wow_c, array(1, 3, 4, 5, 6, 11, 12))) ? true : false;
 						$faction = 1;
 						break;
 
@@ -803,8 +873,8 @@ class pbwow
 						break;
 
 					case 10: // Blood Elf
-						$valid = (in_array($wow_c, array(1, 2, 3, 4, 5, 6, 8, 9, 10))) ? true : false;
-						$avail = (in_array($wow_c, array(2, 3, 4, 5, 6, 8, 9))) ? true : false;
+						$valid = (in_array($wow_c, array(1, 2, 3, 4, 5, 6, 8, 9, 10, 12))) ? true : false;
+						$avail = (in_array($wow_c, array(2, 3, 4, 5, 6, 8, 9, 12))) ? true : false;
 						$faction = 2;
 						break;
 
