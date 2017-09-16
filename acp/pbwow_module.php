@@ -340,7 +340,6 @@ class pbwow_module extends admin
 			if (0 === count($data) )
 			{
 				$cache->destroy('pbwowext_versioncheck');
-				trigger_error($user->lang['PBWOW_VERSION_ERROR'], E_USER_WARNING);
 				return false;
 			}
 
