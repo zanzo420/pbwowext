@@ -31,7 +31,7 @@ class admin
 			'error'               => '',
 		);
 
-		if (function_exists('curl_init'))
+		if (function_exists('curl_version'))
 		{
 			/* Create a CURL handle. */
 			if (($curl = curl_init($url)) === false)
