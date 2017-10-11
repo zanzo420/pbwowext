@@ -1,5 +1,8 @@
-/* pbwow extension */
-
+/**********************
+*                     *
+* pbwow extension css *
+*                     *
+***********************/
 
 /* Top-bar
 --------------------------------------------- */
@@ -86,10 +89,13 @@ body.topbar .navblock {
   text-align: right;
 }
 
+/* video background css
+---------------------------------------------------- */
+body.pbwow3 #video-background {
+  top: 41px;
+  display: inline;
+}
 
-
-/* used in Miscellaneous pbwow styles
---------------------------------------------- */
 #video-background {
   position: absolute;
   height: 100%;
@@ -117,6 +123,8 @@ body.topbar .navblock {
   z-index: -999;
 }
 
+/* fixed background
+---------------------------------------------------- */
 body.fixedbg {
   background-attachment: fixed;
 }
@@ -132,18 +140,33 @@ body.fixedbg #video-background {
   body.fixedbg #video-background { z-index: auto; }
 }
 
-body.pbwow3 #video-background {
-  top: 41px;
-  display: inline;
-}
+/* misc
+---------------------------------------------------- */
 
 #darken {
   background-color: #000;
   opacity: 0.75;
 }
 
+
+/* Recent Topics Advertisement block customisations
+---------------------------------------------------- */
+
 .advertisement, .misc-block.advertisement {
   margin: 10px auto;
   padding: 0;
   overflow: hidden;
+}
+
+.donate-button {
+  background: url('./images/donate.jpg') no-repeat 0 0;
+  display: block;
+  width: 300px;
+  height: 220px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.donate-button:hover {
+  background-position: 0 -220px;
 }

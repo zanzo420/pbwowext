@@ -1,5 +1,11 @@
 ## Changelog
 
+##### 3.2.2 tba
+- [FIX] #16 moved pbwowext css & assets to extension except style-dependent elements (video assets, premium backgrounds...)
+- [CHG] #17 Converted to Twig syntax
+- [FIX] #18 fixed the video display (wip)
+- [FIX] #19 fixed the "fixed" background display (wip)
+  
 ##### 3.2.1 09/09/2017
 - [UPG] Fix for responsibe view in Topbar  
 - [FIX] Versioncheck fix  

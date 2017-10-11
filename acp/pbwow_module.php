@@ -97,9 +97,11 @@ class pbwow_module extends admin
 						'legend4'             => 'PBWOW_VIDEOBG',
 						'videobg_enable'      => array('lang' => 'PBWOW_VIDEOBG_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
 						'videobg_allpages'    => array('lang' => 'PBWOW_VIDEOBG_ALLPAGES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
+
+						'legend5'             => 'PBWOW_FIXEDBG',
 						'fixedbg'             => array('lang' => 'PBWOW_FIXEDBG', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 
-						'legend7'             => 'PBWOW_ADS_INDEX',
+						'legend6'             => 'PBWOW_ADS_INDEX',
 						'ads_index_enable'    => array('lang' => 'PBWOW_ADS_INDEX_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
 						'ads_index_code'      => array('lang' => 'PBWOW_ADS_INDEX_CODE', 'type' => 'textarea:6:6', 'explain' => true),
 					)
