@@ -8,6 +8,7 @@
  */
 
 namespace paybas\pbwowext\acp;
+
 use paybas\pbwowext\core\admin;
 
 /**
@@ -96,9 +97,11 @@ class pbwow_module extends admin
 						'legend4'             => 'PBWOW_VIDEOBG',
 						'videobg_enable'      => array('lang' => 'PBWOW_VIDEOBG_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
 						'videobg_allpages'    => array('lang' => 'PBWOW_VIDEOBG_ALLPAGES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
+
+						'legend5'             => 'PBWOW_FIXEDBG',
 						'fixedbg'             => array('lang' => 'PBWOW_FIXEDBG', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 
-						'legend7'             => 'PBWOW_ADS_INDEX',
+						'legend6'             => 'PBWOW_ADS_INDEX',
 						'ads_index_enable'    => array('lang' => 'PBWOW_ADS_INDEX_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
 						'ads_index_code'      => array('lang' => 'PBWOW_ADS_INDEX_CODE', 'type' => 'textarea:6:6', 'explain' => true),
 					)
@@ -188,9 +191,8 @@ class pbwow_module extends admin
 		else
 		{
 			// you have a prerelease or development version
-			$template->assign_vars(array('S_PBWOW_PRERELEASE'    => true));
+			$template->assign_vars(array('S_PBWOW_PRERELEASE' => true));
 		}
-
 
 		if (phpbb_version_compare($versions['style_version'], $style_version, '='))
 		{
@@ -323,19 +325,23 @@ class pbwow_module extends admin
 	public final function version_check($force_update = false, $ttl = 86400)
 	{
 		global $user, $cache;
+		global $phpbb_container;
+
+		$manager = $phpbb_container->get('ext.manager');
+		$metadata_manager = $manager->create_extension_metadata_manager('paybas/pbwowext', $phpbb_container->get('template'));
+		$meta_data = $metadata_manager->get_metadata();
+		$versionurl = $meta_data['extra']['version-check']['host'].$meta_data['extra']['version-check']['directory'].'/'.$meta_data['extra']['version-check']['filename'];
 
 		//get latest productversion from cache
 		$latest_version = $cache->get('pbwowext_versioncheck');
-		$filename = 'pbwowext.json';
 
 		//if update is forced or cache expired then make the call to refresh latest productversion
 		if ($latest_version === false || $force_update)
 		{
-			$data = parent::curl($user->lang['PBWOW_CHECK_URL'] , false, false, false);
+			$data = parent::curl($versionurl , false, false, false);
 			if (0 === count($data) )
 			{
 				$cache->destroy('pbwowext_versioncheck');
-				trigger_error($user->lang['PBWOW_VERSION_ERROR'], E_USER_WARNING);
 				return false;
 			}
 

@@ -10,10 +10,6 @@
 
 namespace paybas\pbwowext\core;
 
-use phpbb\db\tools;
-use phpbb\version_helper;
-use phpbb\file_downloader;
-
 class admin
 {
 	/**
@@ -35,7 +31,7 @@ class admin
 			'error'               => '',
 		);
 
-		if (function_exists('curl_init'))
+		if (function_exists('curl_version'))
 		{
 			/* Create a CURL handle. */
 			if (($curl = curl_init($url)) === false)
@@ -62,11 +58,7 @@ class admin
 			$response = curl_exec($curl);
 			$headers = curl_getinfo($curl);
 
-			if ($response === false || $response === '')
-			{
-				trigger_error(curl_error($curl), E_USER_WARNING);
-			}
-			else
+			if ($response !== false && $response !== '')
 			{
 				$data = array(
 					'response'            => $json && $this->isJSON($response) ? json_decode($response, true) : $response,
