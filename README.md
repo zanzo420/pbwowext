@@ -18,7 +18,7 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
 
 #### Requirements
 - PhpBB 3.2.1 
-- pbwow style v3.2.1.4
+- pbwow 3.2.1.5 
 
 #### Languages supported
 - English
