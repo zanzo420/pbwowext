@@ -1,5 +1,8 @@
 ## Changelog
 
+##### 3.2.3 13/12/2017
+- [FIX] pbwow3_heroes support
+
 ##### 3.2.2 12/10/2017
 - [FIX] #16 moved pbwowext css & assets to extension except style-dependent elements (video assets, premium backgrounds...)
 - [CHG] #17 Converted to Twig syntax

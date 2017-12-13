@@ -4,7 +4,7 @@ PBWoW 3 Extension for phpBB 3.2
 phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality.
 
 ## Version 
-3.2.2
+3.2.3 13-12-2017
 [![Build Status](https://api.travis-ci.org/Sajaki/pbwowext.svg)](https://travis-ci.org/Sajaki/pbwowext)
 
 ## Features
