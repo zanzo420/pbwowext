@@ -1,5 +1,9 @@
 ## Changelog
 
+##### 3.2.4 24/12/2017
+- [FIX] pbwow3_wotlk support
+- [FIX] prosilver support
+
 ##### 3.2.3 13/12/2017
 - [FIX] pbwow3_heroes support
 
