@@ -4,7 +4,7 @@ PBWoW 3 Extension for phpBB 3.2
 phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality.
 
 ## Version 
-3.2.3 13-12-2017
+3.2.5 01-04-2018
 [![Build Status](https://api.travis-ci.org/Sajaki/pbwowext.svg)](https://travis-ci.org/Sajaki/pbwowext)
 
 ## Features
@@ -17,8 +17,7 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
   - Video background settings (enable/disable, display on all pages or index only, fixed position)
 
 #### Requirements
-- PhpBB 3.2.1 
-- pbwow 3.2.1.5 
+- PhpBB 3.2.x 
 
 #### Languages supported
 - English

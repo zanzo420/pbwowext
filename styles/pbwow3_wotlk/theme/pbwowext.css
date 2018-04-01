@@ -7,8 +7,8 @@
 /* Top-bar
 --------------------------------------------- */
 #top-bar {
-  background: url("./images/bar-bg.jpg") no-repeat scroll 50% 100% #002540;
-  border-bottom: 1px solid #05517E;
+  background: url("./images/bar-bg.jpg") no-repeat scroll 50% 100% #122134;
+  border-bottom-color: #214463;
   box-shadow: 0 0 3px 3px #000000;
   font-family: Arial, sans-serif;
   font-size: 13px;
@@ -20,22 +20,22 @@
 }
 
 #top-bar > .inner {
-  border-right: 3px solid #042E45;
-  border-left: 1px solid #011323;
   height: 40px;
   margin: 0 auto;
   max-width: 990px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  border-right-color: #10283b;
+  border-left-color: #011323;
 }
 
 #top-bar .linklist > li {
-  border-left: 2px solid #042E45;
-  border-right: 1px solid #011323;
   margin: 0;
   padding: 0 15px;
   font-size: inherit;
   line-height: inherit;
+  border-left: 1px solid #10283b;
+  border-right-color: #011323;
 }
 
 #top-bar .linklist > li.link {
@@ -59,6 +59,7 @@
   margin: 5px;
   padding: 3px;
 }
+
 
 /* Adjust the background (and videos) if top-bar is active */
 body.topbar {

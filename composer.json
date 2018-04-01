@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "This extension enhances the pbWoW style",
     "homepage": "https://github.com/Sajaki/pbwowext",
-    "version": "3.2.3",
-    "time": "2017-12-13",
+    "version": "3.2.5",
+    "time": "2018-04-01",
     "license": "GPL-2.0",
     "authors": [
         {
