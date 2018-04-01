@@ -1,5 +1,8 @@
 ## Changelog
 
+##### 3.2.5 01/04/2018
+- [FIX] set z-index for video div due to some links not clickable
+
 ##### 3.2.4 24/12/2017
 - [FIX] pbwow3_wotlk support
 - [FIX] prosilver support
