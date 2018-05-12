@@ -1,5 +1,8 @@
 ## Changelog
 
+##### 3.2.6 11/05/2018
+- [FIX] fix curl https links, migrations dependency issue
+
 ##### 3.2.5 01/04/2018
 - [FIX] set z-index for video div due to some links not clickable
 

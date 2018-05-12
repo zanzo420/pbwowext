@@ -51,8 +51,8 @@ class release_3_2_data extends \phpbb\db\migration\migration
 			),
 			array(
 				'config_name' => 'ads_index_code',
-				'config_value' => '<a class="donate-button" href="http://www.avathar.be/bbdkp/app.php/page/donate"></a>',
-				'config_default' => '<a class="donate-button" href="http://www.avathar.be/bbdkp/app.php/page/donate"></a>',
+				'config_value' => '<a class="donate-button" href="https://www.avathar.be/bbdkp/app.php/page/donate"></a>',
+				'config_default' => '<a class="donate-button" href="https://www.avathar.be/bbdkp/app.php/page/donate"></a>',
 			),
 
 			// Global styling
@@ -66,7 +66,7 @@ class release_3_2_data extends \phpbb\db\migration\migration
 				'config_value' =>'<li data-last-responsive="true" class="leftside">
 <i class="icon fa-cubes fa-fw" aria-hidden="true"></i>&nbsp;<span><strong>Hi there! This is a welcome message</strong></span>
 </li>
-<li data-last-responsive="true" class="leftside"  ><a href="http://www.avathar.be" title="avathar.be" role="menuitem">
+<li data-last-responsive="true" class="leftside"  ><a href="https://www.avathar.be" title="avathar.be" role="menuitem">
 <i class="icon fa-heart fa-fw" aria-hidden="true"></i><span>avathar.be</span></a>
 </li>
 <li data-last-responsive="true" class="leftside"><a href="https://www.phpbb.com" title="phpBB" role="menuitem">
@@ -134,7 +134,7 @@ class release_3_2_data extends \phpbb\db\migration\migration
 			array(
 				'config_name' => 'headerlinks_code',
 				'config_value' => '<li data-last-responsive="true" class="leftside">
-<a href="http://www.phpbb.com/" title="link" target="_blank" role="menuitem">
+<a href="https://www.phpbb.com/" title="link" target="_blank" role="menuitem">
 <i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>phpBB</span></a>
 </li>',
 				'config_default' => '',

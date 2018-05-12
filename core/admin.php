@@ -42,16 +42,15 @@ class admin
 			// set options
 			curl_setopt_array(
 				$curl, array(
-					CURLOPT_RETURNTRANSFER => 1,
-					CURLOPT_URL => $url,
 					CURLOPT_USERAGENT => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0', //override
-					CURLOPT_SSL_VERIFYHOST => false,
-					CURLOPT_SSL_VERIFYPEER => false,
-					CURLOPT_FOLLOWLOCATION, true,
 					CURLOPT_TIMEOUT => 60,
 					CURLOPT_VERBOSE => true,
+					CURLOPT_URL => $url,
 					CURLOPT_HEADER => $return_Server_Response_Header,
-					CURLOPT_HEADER => false
+					CURLOPT_SSL_VERIFYHOST => 2,
+					CURLOPT_SSL_VERIFYPEER => false,  // Disabled SSL Cert checks
+					CURLOPT_FOLLOWLOCATION, true,
+					CURLOPT_RETURNTRANSFER => true, //return web page
 				)
 			);
 
