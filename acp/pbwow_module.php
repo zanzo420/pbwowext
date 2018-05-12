@@ -330,7 +330,7 @@ class pbwow_module extends admin
 		$manager = $phpbb_container->get('ext.manager');
 		$metadata_manager = $manager->create_extension_metadata_manager('paybas/pbwowext', $phpbb_container->get('template'));
 		$meta_data = $metadata_manager->get_metadata();
-		$versionurl = $meta_data['extra']['version-check']['host'].$meta_data['extra']['version-check']['directory'].'/'.$meta_data['extra']['version-check']['filename'];
+		$versionurl = $meta_data['extra']['version-check']['protocol']. $meta_data['extra']['version-check']['host'].$meta_data['extra']['version-check']['directory'].'/'.$meta_data['extra']['version-check']['filename'];
 
 		//get latest productversion from cache
 		$latest_version = $cache->get('pbwowext_versioncheck');
